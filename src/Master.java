@@ -29,7 +29,8 @@ public class Master {
 	static int a = 0;
 	public static JMenu background;
 	private static JLabel statusbar;
-	
+	private static int redCustom, blueCustom, greenCustom;
+	public static JPanel panelF;
 	//Timer timer = new Timer(this, 1000/60);
     //public void actionPerformed(ActionEvent e) //Checks Rando to see if it is pressed
 	
@@ -41,6 +42,7 @@ public class Master {
 		// Creates Main Screen JFrame
 		JPanel panel = new JPanel();
 		frame.setSize(1000, 1000); // Sets size of JFrame
+		panelF = panel;
 		Random c = new Random();
 		panel.setBackground(Color.WHITE);
 		
@@ -62,7 +64,7 @@ public class Master {
 
 //		panel.add(text);
 		text.setVisible(true);
-
+		
 		
 		JButton Alarm = new JButton(" Alarm "); // New Button for Random
 		Alarm.setTransferHandler(new TransferHandler("text"));
@@ -284,8 +286,16 @@ public class Master {
 		custom.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				CustomSlider d = new CustomSlider();
-				frame.add(d);
+				
+				JFrame frame = new JFrame("RGB Slider");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.pack();
+				frame.setContentPane(new CustomSlider());
+				frame.setSize(245, 260);
+				frame.setVisible(true);
+				redCustom = CustomSlider.getR();
+				greenCustom = CustomSlider.getG();
+				blueCustom = CustomSlider.getB();				
 			}
 		});
 		background.add(custom);
@@ -388,6 +398,18 @@ public class Master {
 			 });
 		 Open.add(CalculatorButton);
 		 
+		 
+		 JMenu help = new JMenu("Help");
+		 
+		 JMenuItem helpTab = new JMenuItem("Help");
+		 helpTab.addActionListener(new ActionListener() {
+			 @Override
+			 public void actionPerformed(ActionEvent e) {
+				 
+			 }
+		 });
+		 menubar.add(help);
+		 
 		 view.add(sbar);
 		 menubar.add(Open);
 		 menubar.add(view);
@@ -408,7 +430,9 @@ public class Master {
 
 		 }
 		 
-		 
+	 public static JPanel getPanelCustom(){
+		 return panelF;
+	 }
 		 
 		 }
 
